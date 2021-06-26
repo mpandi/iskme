@@ -1,0 +1,57 @@
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
+{% load material_form %}
+<form method="POST">
+    {% csrf_token %}
+    <div class="container">
+        <h4>Align 1: Measurements in the Laboratory (Experiment)</h4>
+        <div style="text-align: center;">
+            <h5>Add New Alignment Tag</h5>
+        </div>
+        <label for="standard"><b>Education Standard</b></label>
+        <select class="browser-default custom-select" name="standard">
+            <option disabled selected>Select a Standard</option>
+            {% for alignment in alignment_data %}
+            <option value="{{alignment.standard}}">{{alignment.standard}}</option>
+            {% endfor %}
+        </select>
+
+        <label for="grade"><b>Grade Level</b></label>
+        <select class="browser-default custom-select" name="grade">
+            <option disabled selected>Select a Grade Level</option>
+            {% for alignment in alignment_data %}
+            <option value="{{alignment.grade}}">{{alignment.grade}}</option>
+            {% endfor %}
+        </select>
+
+        <label for="domain"><b>Learning Domain</b></label>
+        <select class="browser-default custom-select" name="domain">
+            <option disabled selected>Select a Learning Domain</option>
+            {% for alignment in alignment_data %}
+            <option value="{{alignment.learning_domain}}">{{alignment.learning_domain}}</option>
+            {% endfor %}
+        </select>
+
+        <label for="alignment"><b>Alignment Tag</b></label>
+        <select class="browser-default custom-select" name="alignment_full_code">
+            <option disabled selected>Select an Alignment Tag</option>
+            {% for alignment in alignment_data %}
+            <option value="{{alignment.full_code}}">{{alignment.full_code}}</option>
+            {% endfor %}
+        </select>   
+        
+        <div style="text-align: right; padding-top: 10px;">
+            <a href="" style="padding-right: 10px;">Cancel</a>
+            <input type="submit" name="submit" value="Add Selected Tag" style="background-color: green; color: white;" /> 
+        </div>
+    </div>
+</form>
+
+<div class="container">
+    Upload csv file 
+    <form method="POST" enctype="multipart/form-data" action="/iskme/csv/">
+        {% csrf_token %}
+        <input type="file" id="file1" name="file" />
+        <button type="submit">Upload</button>
+    </form>
+</div>
